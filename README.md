@@ -27,7 +27,7 @@ Các core project trong phiên bản hướng dẫn này gồm: KEYSTONE, GLANCE
 Trong các script mình có sao lưu các file cấu hình gốc, sử dụng các lệnh về thao tác chuỗi, phân quyền, khai báo biến .... để thực hiện việc cấu hình cho OpenStack, các bạn có thể tham khảo trong từng script.
 
 
-## [Hướng dẫn cài đặt OpenStack AIO](https://github.com/vietstacker/icehouse-aio-ubuntu/blob/master/hd-caidat-openstack-icehouse-aio.md)
+## [Hướng dẫn cài đặt OpenStack AIO Ubuntu 14.04](https://github.com/congto/icehouse-aio-ubuntu14.04/blob/master/hd-caidat-openstack-icehouse-aio.md)
 
 ## [Hướng dẫn sử dụng OpenStack AIO]
 
