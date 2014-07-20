@@ -22,6 +22,7 @@
 		- [2.10 Tạo các subnet, router cho tenant](#user-content-210-t%E1%BA%A1o-c%C3%A1c-subnet-router-cho-tenant)
 - [III. Chuyển qua hướng dẫn sử dụng dashboard (horizon)](#user-content-iii-chuy%E1%BB%83n-qua-h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-s%E1%BB%AD-d%E1%BB%A5ng-dashboard-horizon)
 
+
 # I. Thông tin LAB
 - Cài đặt OpenStack Icehouse trên Ubuntu 12.04, môi trường giả lập vmware-workstation
 - Các thành phần cài đặt trong OpenStack: Keystone, Glance, Nova (sử dụng KVM), Neutron, Horizon
