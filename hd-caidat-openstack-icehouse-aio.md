@@ -66,9 +66,9 @@ Thực hiện tải gói gile và phân quyền cho các file sau khi tải từ
 
     apt-get install git -y
 	
-    git clone https://github.com/vietstacker/icehouse-aio-ubuntu.git
+    git clone https://github.com/congto/icehouse-aio-ubuntu14.04.git
     
-	cd icehouse-aio-ubuntu
+	cd icehouse-aio-ubuntu14.04
     
 	chmod +x *.sh
 
@@ -84,7 +84,7 @@ Sau khi thực hiện script trên xong, hệ thống sẽ khởi động lại.
 
 Lúc này bạn đăng nhập vào hệ thống và di chuyển vào thưc mục icehouse-allinone bằng lệnh:
 
-    cd icehouse-aio-ubuntu
+    cd icehouse-aio-ubuntu14.04
 
 Cài đặt MYSQL, tạo DB cho Keystone, Glance, Nova, Neutron:
 
@@ -148,7 +148,7 @@ Cài đặt Neutron Server, ML, L3-agent, DHCP-agent, metadata-agent:
 
 Login vào bằng tài khoản root và di chuyển vào thư mục icehouse-allinone
 
-    cd icehouse-aio-ubuntu
+    cd icehouse-aio-ubuntu14.04
     bash 8-icehouse-aio-install-neutron.sh
 
 ### 2.9 Cài đặt HORIZON
