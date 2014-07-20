@@ -30,12 +30,12 @@
 - Máy ảo sử dụng 2 Nics. Eth0 dành cho Extenal, API, MGNT. Eth1 dành cho Internal.
 
 # II. Các bước cài đặt
-## 1. Cài đặt Ubuntu 12.04 trong Vmware Workstation
+## 1. Cài đặt Ubuntu 14.04 trong Vmware Workstation
 
-Thiết lập cấu hình cho Ubuntu Server 12.04 trong VMware Workstation hoặc máy vật lý như sau
+Thiết lập cấu hình cho Ubuntu Server 14.04 trong VMware Workstation hoặc máy vật lý như sau
 
 - RAM 4GB
-- 1st HDD (sda) 60GB cài đặt Ubuntu server 12.04-4
+- 1st HDD (sda) 60GB cài đặt Ubuntu server 14.04
 - 2nd HDD (sdb) Làm volume cho CINDER
 - 3rd HDD (sdc) Dùng cho cấu hình SWIFT
 - NIC 1st : External - dùng chế độ bridge - Dải IP 192.168.1.0/24 - Gateway 192.168.1.1
