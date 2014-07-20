@@ -24,7 +24,7 @@
 
 
 # I. Thông tin LAB
-- Cài đặt OpenStack Icehouse trên Ubuntu 12.04, môi trường giả lập vmware-workstation
+- Cài đặt OpenStack Icehouse trên Ubuntu 14.04, môi trường giả lập vmware-workstation
 - Các thành phần cài đặt trong OpenStack: Keystone, Glance, Nova (sử dụng KVM), Neutron, Horizon
 - Neutron sử dụng plugin ML2, GRE và use case cho mô hình mạng là per-teanant per-router
 - Máy ảo sử dụng 2 Nics. Eth0 dành cho Extenal, API, MGNT. Eth1 dành cho Internal.
