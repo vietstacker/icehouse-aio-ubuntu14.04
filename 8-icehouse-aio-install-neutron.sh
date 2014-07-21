@@ -151,15 +151,33 @@ chown root:neutron $controlML2
 
 echo "########## KHOI DONG LAI NEUTRON        ##########"
 sleep 5
-for i in $( ls /etc/init.d/neutron-* ); do service `basename $i` restart; done
+# for i in $( ls /etc/init.d/neutron-* ); do service `basename $i` restart; done
+service neutron-server restart
+service neutron-l3-agent restart
+service neutron-dhcp-agent restart
+service neutron-metadata-agent restart
+service openvswitch-switch restart
+service neutron-plugin-openvswitch-agent restart
+
 
 echo "########## KHOI DONG LAI NEUTRON (lan2) ##########"
 sleep 5
-for i in $( ls /etc/init.d/neutron-* ); do service `basename $i` restart; done
+# for i in $( ls /etc/init.d/neutron-* ); do service `basename $i` restart; done
+service neutron-server restart
+service neutron-l3-agent restart
+service neutron-dhcp-agent restart
+service neutron-metadata-agent restart
+service openvswitch-switch restart
+service neutron-plugin-openvswitch-agent restart
 
 # Them lenh khoi dong dich vu cua NEUTRON moi khi reboot OpenStack de fix loi.
 sed -i "s/exit 0/# exit 0/g" /etc/rc.local
-echo "for i in \$( ls /etc/init.d/neutron-* ); do service \`basename \$i\` restart; done" >> /etc/rc.local
+echo "service neutron-server restart"
+echo "service neutron-l3-agent restart"
+echo "service neutron-dhcp-agent restart"
+echo "service neutron-metadata-agent restart"
+echo "service openvswitch-switch restart"
+echo "service neutron-plugin-openvswitch-agent restart"
 echo "exit 0" >> /etc/rc.local
 
 
