@@ -23,7 +23,7 @@ sudo a2enconf servername
 
 echo "########## Tao trang redirect ##########"
 
-filehtml=/var/www/index.html
+filehtml=/var/www/html/index.html
 test -f $filehtml.orig || cp $filehtml $filehtml.orig
 rm $filehtml
 touch $filehtml

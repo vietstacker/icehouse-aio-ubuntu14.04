@@ -69,8 +69,8 @@ service keystone restart
 (crontab -l -u keystone 2>&1 | grep -q token_flush) || \
 echo '@hourly /usr/bin/keystone-manage token_flush >/var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone
 
-# export OS_SERVICE_TOKEN=$TOKEN_PASS
-# export OS_SERVICE_ENDPOINT=http://$MASTER:35357/v2.0
+export OS_SERVICE_TOKEN=$TOKEN_PASS
+export OS_SERVICE_ENDPOINT=http://$MASTER:35357/v2.0
 
 # echo "##### Kiem tra keystone sau khi khai bao bien moi truong ##### "
 # keystone user-list
