@@ -63,15 +63,17 @@ Thiết lập cấu hình cho Ubuntu Server 14.04 trong VMware Workstation hoặ
 
 Thực hiện tải gói gile và phân quyền cho các file sau khi tải từ github về:
 
-`apt-get update`
+
+
+    apt-get update
 
     apt-get install git -y
 	
     git clone https://github.com/congto/icehouse-aio-ubuntu14.04.git
     
-	cd icehouse-aio-ubuntu14.04
+    cd icehouse-aio-ubuntu14.04
     
-	chmod +x *.sh
+    chmod +x *.sh
 
 ### 2.0 Update hệ thống và cài đặt các gói bổ trợ
 
