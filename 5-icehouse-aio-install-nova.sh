@@ -47,6 +47,10 @@ novncproxy_base_url = http://$MASTER:6080/vnc_auto.html
 # Tu dong Start VM khi reboot OpenStack
 resume_guests_state_on_host_boot=True
 
+# Cho phep thay doi kich thuoc may ao
+allow_resize_to_same_host=True
+scheduler_default_filters=AllHostsFilter
+
 #Cho phep dat password cho Instance khi khoi tao
 libvirt_inject_password = True
 enable_instance_password = True
