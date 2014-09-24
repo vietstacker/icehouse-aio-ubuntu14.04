@@ -172,12 +172,12 @@ service neutron-plugin-openvswitch-agent restart
 
 # Them lenh khoi dong dich vu cua NEUTRON moi khi reboot OpenStack de fix loi.
 sed -i "s/exit 0/# exit 0/g" /etc/rc.local
-echo "service neutron-server restart"
-echo "service neutron-l3-agent restart"
-echo "service neutron-dhcp-agent restart"
-echo "service neutron-metadata-agent restart"
-echo "service openvswitch-switch restart"
-echo "service neutron-plugin-openvswitch-agent restart"
+echo "service neutron-server restart" >> /etc/rc.local
+echo "service neutron-l3-agent restart" >> /etc/rc.local
+echo "service neutron-dhcp-agent restart" >> /etc/rc.local
+echo "service neutron-metadata-agent restart" >> /etc/rc.local
+echo "service openvswitch-switch restart" >> /etc/rc.local
+echo "service neutron-plugin-openvswitch-agent restart" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 
 
