@@ -42,7 +42,7 @@ sudo apt-get install swift swift-account swift-container swift-object xfsprogs -
 
 # fdisk /dev/sdc
 (echo o; echo n; echo p; echo 1; echo ; echo; echo w) | sudo fdisk /dev/sdc
-echo "/dev/sdc1 /srv/node/sdc1 xfs noatime,nodiratime,nobarrier,logbufs= 8 0 0" >> /etc/fstab
+echo "/dev/sdc1 /srv/node/sdc1 xfs _netdev 0 0" >> /etc/fstab
 
 mkfs.xfs /dev/sdc1
 mkdir -p /srv/node/sdc1
