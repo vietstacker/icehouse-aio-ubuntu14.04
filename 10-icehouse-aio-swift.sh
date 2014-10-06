@@ -18,9 +18,10 @@ keystone service-create --name=swift --type=object-store \
 keystone endpoint-create \
 --region RegionOne \
 --service-id=$(keystone service-list | awk '/ object-store / {print $2}') \
---publicurl='http://$MASTER:8080/v1/AUTH_%(tenant_id)s' \
---internalurl='http://$MASTER:8080/v1/AUTH_%(tenant_id)s' \
---adminurl=http://$MASTER:8080
+--publicurl=http://192.168.56.130:8080/v1/AUTH_%\(tenant_id\)s \
+--internalurl=http://192.168.56.130:8080/v1/AUTH_%\(tenant_id\)s \
+--adminurl=http://192.168.56.130:8080
+
 
 echo "##### CAU HINH CHO SWIFT #####"
 # Tạo folder cấu hình 
@@ -183,4 +184,10 @@ swift-container swift-container-replicator swift-container-updater swift-contain
 swift-account swift-account-replicator swift-account-reaper swift-account-auditor; do \
 service $service start; done
 
-echo "##### Hoan thanh cai dat SWIFT #####"
+echo "##### Kiem tra viec cai dat SWIFT #####"
+sleep 3
+
+swift stat
+echo "##### Cai dat thanh cong #####"
+
+
