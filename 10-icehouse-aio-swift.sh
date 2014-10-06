@@ -5,11 +5,10 @@ SWIFT
 
 echo "##### TAO USER, ROLE, SERVICE, ENDPOINT #####"
 # Tao user
-keystone user-create --name=swift --pass=SWIFT_PASS \
---email=swift@example.com
+# keystone user-create --name=swift --pass=SWIFT_PASS --email=swift@example.com
 
 # Add role cho user
-keystone user-role-add --user=swift --tenant=service --role=admin
+# keystone user-role-add --user=swift --tenant=service --role=admin
 
 # Tao service ten la swift
 keystone service-create --name=swift --type=object-store \
@@ -23,7 +22,7 @@ keystone endpoint-create \
 --internalurl='http://$MASTER:8080/v1/AUTH_%(tenant_id)s' \
 --adminurl=http://$MASTER:8080
 
-echo "##### CAU HINH CHO SWIFT #####
+echo "##### CAU HINH CHO SWIFT #####"
 # Tạo folder cấu hình 
  mkdir -p /etc/swift
  
