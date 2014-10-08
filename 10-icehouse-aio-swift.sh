@@ -31,7 +31,7 @@ echo "##### CAU HINH CHO SWIFT #####"
 cat << EOF >> /etc/swift/swift.conf
 [swift-hash]
 # random unique string that can never change (DO NOT LOSE)
-swift_hash_path_suffix = fLIbertYgibbitZ
+swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
 echo "##### Cài đặt các thành phần storage #####"
@@ -58,19 +58,19 @@ gid = swift
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
 address = $LOCAL_IP
-
+ 
 [account]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/account.lock
-
+ 
 [container]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/container.lock
-
+ 
 [object]
 max connections = 2
 path = /srv/node/
@@ -104,36 +104,45 @@ cat << EOF >> /etc/swift/proxy-server.conf
 [DEFAULT]
 bind_port = 8080
 user = swift
+
 [pipeline:main]
 pipeline = healthcheck cache authtoken keystoneauth proxy-server
+
 [app:proxy-server]
 use = egg:swift#proxy
 allow_account_management = true
 account_autocreate = true
+
 [filter:keystoneauth]
 use = egg:swift#keystoneauth
 operator_roles = Member,admin,swiftoperator
+
 [filter:authtoken]
 paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
+
 # Delaying the auth decision is required to support token-less
 # usage for anonymous referrers ('.r:*').
 delay_auth_decision = true
-# cache directory for signing certificate
-# signing_dir = /home/swift/keystone-signing
+
 # auth_* settings refer to the Keystone server
 auth_protocol = http
 auth_host = $MASTER
 auth_port = 35357
+
 # the service tenant and swift username and password created in Keystone
 admin_tenant_name = service
 admin_user = swift
-admin_password = Welcome123
+admin_password = $ADMIN_PASS
+
 [filter:cache]
 use = egg:swift#memcache
+
 [filter:catch_errors]
 use = egg:swift#catch_errors
+
 [filter:healthcheck]
 use = egg:swift#healthcheck
+
 EOF
 
 echo "##### Tạo account, container và object ring #####"
