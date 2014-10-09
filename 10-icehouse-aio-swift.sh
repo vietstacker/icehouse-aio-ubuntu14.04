@@ -34,7 +34,7 @@ cat << EOF >> /etc/swift/swift.conf
 swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
-echo "##### Cài đặt các thành phần storage #####"
+echo "##### Cai dat cac thanh phan storage #####"
 sudo apt-get install swift swift-account swift-container swift-object xfsprogs -y 
 
 #  Format phân vùng cho Swift về XFS
@@ -50,7 +50,7 @@ mount /dev/sdc1 /srv/node/sdc1
 # mount /srv/node/sdb1
 chown -R swift:swift /srv/node
 
-echo "##### Tạo file /etc/rsyncd.conf ####"
+echo "##### Tao file /etc/rsyncd.conf ####"
 sleep 3
 cat << EOF >> /etc/rsyncd.conf
 uid = swift
@@ -88,7 +88,7 @@ service rsync start
 mkdir -p /var/swift/recon
 chown -R swift:swift /var/swift/recon
 
-echo "##### Cài đặt dịch vụ swift-proxy #####"
+# echo "##### Cài đặt dịch vụ swift-proxy #####"
 sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
@@ -145,26 +145,26 @@ use = egg:swift#healthcheck
 
 EOF
 
-echo "##### Tạo account, container và object ring #####"
+echo "##### Tao account, container va object ring #####"
 sleep 3 
 cd /etc/swift
 swift-ring-builder account.builder create 18 3 1
 swift-ring-builder container.builder create 18 3 1
 swift-ring-builder object.builder create 18 3 1
 
-echo "##### Thêm entry cho các ring #####"
+echo "##### Them entry cho ring #####"
 sleep 3 
 swift-ring-builder account.builder add z1-$LOCAL_IP:6002/sdc1 100
 swift-ring-builder container.builder add z1-$LOCAL_IP:6001/sdc1 100
 swift-ring-builder object.builder add z1-$LOCAL_IP:6000/sdc1 100
 
-echo "##### Kiểm tra lại ring content #####"
+echo "##### kiem tra lai cac ring #####"
 sleep 3
 swift-ring-builder account.builder
 swift-ring-builder container.builder
 swift-ring-builder object.builder
 
-echo "##### Rebalance các ring #####"
+echo "##### Rebalance cac ring #####"
 sleep 3
 
 swift-ring-builder account.builder rebalance
@@ -176,7 +176,7 @@ cd /root
 #  Gán quyền cho user Swift sở hữu các file cấu hình
 chown -R swift:swift /etc/swift
 
-echo "##### Khởi động lại các dịch vụ phu tro #####"
+echo "##### Khoi dong lai bang #####"
 sleep 3
 
 swift-init proxy start
@@ -184,7 +184,7 @@ swift-init main start
 service rsyslog restart
 service memcached restart
 
-echo "##### Khởi động lại các dịch vụ Swift #####"
+# echo "##### Khởi động lại các dịch vụ Swift #####"
 sleep 3
 
 for service in \
