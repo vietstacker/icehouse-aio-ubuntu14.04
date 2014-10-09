@@ -35,7 +35,11 @@ swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Cac dat storage #####"
+=======
+echo "##### Cai dat cac thanh phan storage #####"
+>>>>>>> origin/master
 =======
 echo "##### Cai dat cac thanh phan storage #####"
 >>>>>>> origin/master
@@ -93,7 +97,11 @@ mkdir -p /var/swift/recon
 chown -R swift:swift /var/swift/recon
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Cai dat dich vu swift-proxy #####"
+=======
+# echo "##### Cài đặt dịch vụ swift-proxy #####"
+>>>>>>> origin/master
 =======
 # echo "##### Cài đặt dịch vụ swift-proxy #####"
 >>>>>>> origin/master
@@ -101,7 +109,11 @@ sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
 # Sửa file /etc/memcached.conf để memcached lắng nghe local interface
+<<<<<<< HEAD
 sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g /etc/memcached.conf 
+=======
+sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g" /etc/memcached.conf 
+>>>>>>> origin/master
 
 # Khoi dong lai mem Cache
 service memcached restart
@@ -152,7 +164,11 @@ use = egg:swift#healthcheck
 EOF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Tao account, container & object ring #####"
+=======
+echo "##### Tao account, container va object ring #####"
+>>>>>>> origin/master
 =======
 echo "##### Tao account, container va object ring #####"
 >>>>>>> origin/master
@@ -169,7 +185,11 @@ swift-ring-builder container.builder add z1-$LOCAL_IP:6001/sdc1 100
 swift-ring-builder object.builder add z1-$LOCAL_IP:6000/sdc1 100
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Kiem tra lai ring content #####"
+=======
+echo "##### kiem tra lai cac ring #####"
+>>>>>>> origin/master
 =======
 echo "##### kiem tra lai cac ring #####"
 >>>>>>> origin/master
@@ -191,7 +211,11 @@ cd /root
 chown -R swift:swift /etc/swift
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Khoi dong lai cac dich vu phu tro #####"
+=======
+echo "##### Khoi dong lai bang #####"
+>>>>>>> origin/master
 =======
 echo "##### Khoi dong lai bang #####"
 >>>>>>> origin/master
@@ -203,7 +227,11 @@ service rsyslog restart
 service memcached restart
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 echo "##### Khoi dong lai Swift #####"
+=======
+# echo "##### Khởi động lại các dịch vụ Swift #####"
+>>>>>>> origin/master
 =======
 # echo "##### Khởi động lại các dịch vụ Swift #####"
 >>>>>>> origin/master
