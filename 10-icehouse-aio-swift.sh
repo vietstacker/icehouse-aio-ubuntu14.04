@@ -93,7 +93,7 @@ sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
 # Sửa file /etc/memcached.conf để memcached lắng nghe local interface
-sed -i 's/-l 127.0.0.1/-l $LOCAL_IP/g' /etc/memcached.conf 
+sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g" /etc/memcached.conf 
 
 # Khởi động lại memcached
 service memcached restart
