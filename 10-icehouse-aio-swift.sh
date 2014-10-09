@@ -34,7 +34,7 @@ cat << EOF >> /etc/swift/swift.conf
 swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
-echo "##### Cài đặt các thành phần storage #####"
+echo "##### Cac dat storage #####"
 sudo apt-get install swift swift-account swift-container swift-object xfsprogs -y 
 
 #  Format phân vùng cho Swift về XFS
@@ -50,7 +50,7 @@ mount /dev/sdc1 /srv/node/sdc1
 # mount /srv/node/sdb1
 chown -R swift:swift /srv/node
 
-echo "##### Tạo file /etc/rsyncd.conf ####"
+echo "##### Tao file /etc/rsyncd.conf ####"
 sleep 3
 cat << EOF >> /etc/rsyncd.conf
 uid = swift
@@ -58,19 +58,19 @@ gid = swift
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
 address = $LOCAL_IP
- 
+
 [account]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/account.lock
- 
+
 [container]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/container.lock
- 
+
 [object]
 max connections = 2
 path = /srv/node/
@@ -88,14 +88,14 @@ service rsync start
 mkdir -p /var/swift/recon
 chown -R swift:swift /var/swift/recon
 
-echo "##### Cài đặt dịch vụ swift-proxy #####"
+echo "##### Cai dat dich vu swift-proxy #####"
 sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
 # Sửa file /etc/memcached.conf để memcached lắng nghe local interface
 sed -i 's/-l 127.0.0.1/-l $LOCAL_IP/g' /etc/memcached.conf 
 
-# Khởi động lại memcached
+# Khoi dong lai mem Cache
 service memcached restart
 
 # Tạo file /etc/swift/proxy-server.conf
@@ -104,7 +104,6 @@ cat << EOF >> /etc/swift/proxy-server.conf
 [DEFAULT]
 bind_port = 8080
 user = swift
-
 [pipeline:main]
 pipeline = healthcheck cache authtoken keystoneauth proxy-server
 
@@ -119,20 +118,19 @@ operator_roles = Member,admin,swiftoperator
 
 [filter:authtoken]
 paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
-
 # Delaying the auth decision is required to support token-less
 # usage for anonymous referrers ('.r:*').
 delay_auth_decision = true
-
 # auth_* settings refer to the Keystone server
+
 auth_protocol = http
-auth_host = $MASTER
+auth_host = controller
 auth_port = 35357
 
 # the service tenant and swift username and password created in Keystone
 admin_tenant_name = service
 admin_user = swift
-admin_password = $ADMIN_PASS
+admin_password = Welcome123
 
 [filter:cache]
 use = egg:swift#memcache
@@ -145,7 +143,7 @@ use = egg:swift#healthcheck
 
 EOF
 
-echo "##### Tạo account, container và object ring #####"
+echo "##### Tao account, container & object ring #####"
 sleep 3 
 cd /etc/swift
 swift-ring-builder account.builder create 18 3 1
@@ -158,13 +156,13 @@ swift-ring-builder account.builder add z1-$LOCAL_IP:6002/sdc1 100
 swift-ring-builder container.builder add z1-$LOCAL_IP:6001/sdc1 100
 swift-ring-builder object.builder add z1-$LOCAL_IP:6000/sdc1 100
 
-echo "##### Kiểm tra lại ring content #####"
+echo "##### Kiem tra lai ring content #####"
 sleep 3
 swift-ring-builder account.builder
 swift-ring-builder container.builder
 swift-ring-builder object.builder
 
-echo "##### Rebalance các ring #####"
+echo "##### Rebalance cac ring #####"
 sleep 3
 
 swift-ring-builder account.builder rebalance
@@ -176,7 +174,7 @@ cd /root
 #  Gán quyền cho user Swift sở hữu các file cấu hình
 chown -R swift:swift /etc/swift
 
-echo "##### Khởi động lại các dịch vụ phu tro #####"
+echo "##### Khoi dong lai cac dich vu phu tro #####"
 sleep 3
 
 swift-init proxy start
@@ -184,7 +182,7 @@ swift-init main start
 service rsyslog restart
 service memcached restart
 
-echo "##### Khởi động lại các dịch vụ Swift #####"
+echo "##### Khoi dong lai Swift #####"
 sleep 3
 
 for service in \
