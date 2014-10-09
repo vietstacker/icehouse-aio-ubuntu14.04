@@ -1,8 +1,6 @@
 #!/bin/bash -ex
 source config-after-neutron.cfg
 
-SWIFT
-
 echo "##### TAO USER, ROLE, SERVICE, ENDPOINT #####"
 # Tao user
 # keystone user-create --name=swift --pass=SWIFT_PASS --email=swift@example.com
@@ -25,7 +23,7 @@ keystone endpoint-create \
 
 echo "##### CAU HINH CHO SWIFT #####"
 # Tạo folder cấu hình 
- mkdir -p /etc/swift
+mkdir -p /etc/swift
  
 # Tạo /etc/swift/swift.conf
 cat << EOF >> /etc/swift/swift.conf
@@ -34,15 +32,7 @@ cat << EOF >> /etc/swift/swift.conf
 swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Cac dat storage #####"
-=======
 echo "##### Cai dat cac thanh phan storage #####"
->>>>>>> origin/master
-=======
-echo "##### Cai dat cac thanh phan storage #####"
->>>>>>> origin/master
 sudo apt-get install swift swift-account swift-container swift-object xfsprogs -y 
 
 #  Format phân vùng cho Swift về XFS
@@ -66,19 +56,19 @@ gid = swift
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
 address = $LOCAL_IP
-
+ 
 [account]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/account.lock
-
+ 
 [container]
 max connections = 2
 path = /srv/node/
 read only = false
 lock file = /var/lock/container.lock
-
+ 
 [object]
 max connections = 2
 path = /srv/node/
@@ -96,26 +86,14 @@ service rsync start
 mkdir -p /var/swift/recon
 chown -R swift:swift /var/swift/recon
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Cai dat dich vu swift-proxy #####"
-=======
 # echo "##### Cài đặt dịch vụ swift-proxy #####"
->>>>>>> origin/master
-=======
-# echo "##### Cài đặt dịch vụ swift-proxy #####"
->>>>>>> origin/master
 sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
 # Sửa file /etc/memcached.conf để memcached lắng nghe local interface
-<<<<<<< HEAD
-sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g /etc/memcached.conf 
-=======
 sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g" /etc/memcached.conf 
->>>>>>> origin/master
 
-# Khoi dong lai mem Cache
+# Khởi động lại memcached
 service memcached restart
 
 # Tạo file /etc/swift/proxy-server.conf
@@ -124,6 +102,7 @@ cat << EOF >> /etc/swift/proxy-server.conf
 [DEFAULT]
 bind_port = 8080
 user = swift
+
 [pipeline:main]
 pipeline = healthcheck cache authtoken keystoneauth proxy-server
 
@@ -138,19 +117,20 @@ operator_roles = Member,admin,swiftoperator
 
 [filter:authtoken]
 paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
+
 # Delaying the auth decision is required to support token-less
 # usage for anonymous referrers ('.r:*').
 delay_auth_decision = true
-# auth_* settings refer to the Keystone server
 
+# auth_* settings refer to the Keystone server
 auth_protocol = http
-auth_host = controller
+auth_host = $MASTER
 auth_port = 35357
 
 # the service tenant and swift username and password created in Keystone
 admin_tenant_name = service
 admin_user = swift
-admin_password = Welcome123
+admin_password = $ADMIN_PASS
 
 [filter:cache]
 use = egg:swift#memcache
@@ -163,15 +143,7 @@ use = egg:swift#healthcheck
 
 EOF
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Tao account, container & object ring #####"
-=======
 echo "##### Tao account, container va object ring #####"
->>>>>>> origin/master
-=======
-echo "##### Tao account, container va object ring #####"
->>>>>>> origin/master
 sleep 3 
 cd /etc/swift
 swift-ring-builder account.builder create 18 3 1
@@ -184,15 +156,7 @@ swift-ring-builder account.builder add z1-$LOCAL_IP:6002/sdc1 100
 swift-ring-builder container.builder add z1-$LOCAL_IP:6001/sdc1 100
 swift-ring-builder object.builder add z1-$LOCAL_IP:6000/sdc1 100
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Kiem tra lai ring content #####"
-=======
 echo "##### kiem tra lai cac ring #####"
->>>>>>> origin/master
-=======
-echo "##### kiem tra lai cac ring #####"
->>>>>>> origin/master
 sleep 3
 swift-ring-builder account.builder
 swift-ring-builder container.builder
@@ -210,15 +174,7 @@ cd /root
 #  Gán quyền cho user Swift sở hữu các file cấu hình
 chown -R swift:swift /etc/swift
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Khoi dong lai cac dich vu phu tro #####"
-=======
 echo "##### Khoi dong lai bang #####"
->>>>>>> origin/master
-=======
-echo "##### Khoi dong lai bang #####"
->>>>>>> origin/master
 sleep 3
 
 swift-init proxy start
@@ -226,15 +182,7 @@ swift-init main start
 service rsyslog restart
 service memcached restart
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo "##### Khoi dong lai Swift #####"
-=======
-# echo "##### Khởi động lại các dịch vụ Swift #####"
->>>>>>> origin/master
-=======
-# echo "##### Khởi động lại các dịch vụ Swift #####"
->>>>>>> origin/master
+# echo "##### Khoi dong lai cac dich vu cua Swift #####"
 sleep 3
 
 for service in \
@@ -248,5 +196,4 @@ sleep 3
 
 swift stat
 echo "##### Cai dat thanh cong #####"
-
 
