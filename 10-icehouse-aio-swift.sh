@@ -34,7 +34,11 @@ cat << EOF >> /etc/swift/swift.conf
 swift_hash_path_prefix = xrfuniounenqjnw
 EOF
 
+<<<<<<< HEAD
 echo "##### Cac dat storage #####"
+=======
+echo "##### Cai dat cac thanh phan storage #####"
+>>>>>>> origin/master
 sudo apt-get install swift swift-account swift-container swift-object xfsprogs -y 
 
 #  Format phân vùng cho Swift về XFS
@@ -88,12 +92,16 @@ service rsync start
 mkdir -p /var/swift/recon
 chown -R swift:swift /var/swift/recon
 
+<<<<<<< HEAD
 echo "##### Cai dat dich vu swift-proxy #####"
+=======
+# echo "##### Cài đặt dịch vụ swift-proxy #####"
+>>>>>>> origin/master
 sleep 3
 apt-get install swift-proxy memcached python-keystoneclient python-swiftclient python-webob -y
 
 # Sửa file /etc/memcached.conf để memcached lắng nghe local interface
-sed -i 's/-l 127.0.0.1/-l $LOCAL_IP/g' /etc/memcached.conf 
+sed -i "s/-l 127.0.0.1/-l $LOCAL_IP/g /etc/memcached.conf 
 
 # Khoi dong lai mem Cache
 service memcached restart
@@ -143,20 +151,28 @@ use = egg:swift#healthcheck
 
 EOF
 
+<<<<<<< HEAD
 echo "##### Tao account, container & object ring #####"
+=======
+echo "##### Tao account, container va object ring #####"
+>>>>>>> origin/master
 sleep 3 
 cd /etc/swift
 swift-ring-builder account.builder create 18 3 1
 swift-ring-builder container.builder create 18 3 1
 swift-ring-builder object.builder create 18 3 1
 
-echo "##### Thêm entry cho các ring #####"
+echo "##### Them entry cho ring #####"
 sleep 3 
 swift-ring-builder account.builder add z1-$LOCAL_IP:6002/sdc1 100
 swift-ring-builder container.builder add z1-$LOCAL_IP:6001/sdc1 100
 swift-ring-builder object.builder add z1-$LOCAL_IP:6000/sdc1 100
 
+<<<<<<< HEAD
 echo "##### Kiem tra lai ring content #####"
+=======
+echo "##### kiem tra lai cac ring #####"
+>>>>>>> origin/master
 sleep 3
 swift-ring-builder account.builder
 swift-ring-builder container.builder
@@ -174,7 +190,11 @@ cd /root
 #  Gán quyền cho user Swift sở hữu các file cấu hình
 chown -R swift:swift /etc/swift
 
+<<<<<<< HEAD
 echo "##### Khoi dong lai cac dich vu phu tro #####"
+=======
+echo "##### Khoi dong lai bang #####"
+>>>>>>> origin/master
 sleep 3
 
 swift-init proxy start
@@ -182,7 +202,11 @@ swift-init main start
 service rsyslog restart
 service memcached restart
 
+<<<<<<< HEAD
 echo "##### Khoi dong lai Swift #####"
+=======
+# echo "##### Khởi động lại các dịch vụ Swift #####"
+>>>>>>> origin/master
 sleep 3
 
 for service in \
