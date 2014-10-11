@@ -35,7 +35,8 @@ EOF
 echo "##### Cai dat cac thanh phan storage #####"
 sudo apt-get install swift swift-account swift-container swift-object xfsprogs -y 
 
-#  Format phân vùng cho Swift về XFS
+echo "##### Phan vung va mount o cho SWIFT #####"
+sleep 3
 # 
 
 # fdisk /dev/sdc
